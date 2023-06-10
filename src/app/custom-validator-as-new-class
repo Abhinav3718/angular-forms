@@ -1,0 +1,18 @@
+import { Directive } from "@angular/core";
+import { AbstractControl, NG_VALIDATORS, Validator } from "@angular/forms";
+
+@Directive({
+    selector: '[appPhoneNumberValidator]',
+    providers: [{
+      provide: NG_VALIDATORS,
+      useExisting: ValidatorString,
+      multi: true
+    }]
+  })
+export class ValidatorString implements Validator {
+    validate(control: AbstractControl): {[key: string]: any} | null {
+
+        
+        return null;
+    }
+}

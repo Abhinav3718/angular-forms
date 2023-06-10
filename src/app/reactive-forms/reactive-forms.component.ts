@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ReactiveFormsComponent implements OnInit {
 
   formGroup: FormGroup = new FormGroup({
-    userName: new FormControl('', [Validators.required]),
+    userName: new FormControl('', [Validators.required, this.testValidatorString.bind(this.testValidatorString)]),
     contact: new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       mobile: new FormControl(null, Validators.required)
@@ -31,5 +31,12 @@ export class ReactiveFormsComponent implements OnInit {
 
   onSubmit() {
     console.log(this.formGroup)
+  }
+
+  testValidatorString(control: FormControl): {[key: string]: any} | null {
+    if(control.value.length < 3) {
+      return {minLength: '3'}
+    }
+    return null;
   }
 }
